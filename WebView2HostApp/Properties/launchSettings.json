@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WebView2HostApp (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "WebView2HostApp (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
