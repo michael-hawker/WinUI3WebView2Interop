@@ -10,15 +10,88 @@
     mc:Ignorable="d">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0" Margin="23">
+            <RichTextBlock IsTextSelectionEnabled="True" TextWrapping="Wrap">
+                <Paragraph>
+                    This example shows how to add a host object to the WebView. See <Hyperlink
+                        FontWeight="SemiBold"
+                        NavigateUri="https://learn.microsoft.com/en-us/dotnet/api/microsoft.web.webview2.core.corewebview2.addhostobjecttoscript"
+                        UnderlineStyle="None">
+                        here
+                    </Hyperlink>
+                    for more details about the AddHostObjectToScript API.</Paragraph>
+                <Paragraph />
+                <Paragraph>
+                    Using AddHostObjectToScript in a UWP app requires a different approach then the .NET based injection. See <Hyperlink
+                        FontWeight="SemiBold"
+                        NavigateUri="https://learn.microsoft.com/en-us/microsoft-edge/webview2/how-to/winrt-from-js?tabs=csharp"
+                        UnderlineStyle="None">
+                        here
+                    </Hyperlink>
+                    for more details.</Paragraph>
+            </RichTextBlock>
+
+            <TextBlock
+                Margin="0,17,0,7"
+                HorizontalAlignment="Stretch"
+                FontWeight="Bold"
+                IsTextSelectionEnabled="False"
+                Text="Items"
+                TextWrapping="Wrap" />
+            <TextBox
+                x:Name="ItemsListTextBox"
+                Width="Auto"
+                Height="172"
+                Margin="0,0,0,7"
+                HorizontalAlignment="Stretch"
+                AcceptsReturn="False"
+                IsReadOnly="True"
+                PlaceholderText="Add items to this list by clicking the buttons below."
+                TextWrapping="Wrap" />
+
+            <StackPanel Orientation="Vertical" Spacing="7">
+                <StackPanel Orientation="Horizontal" Spacing="7">
+                    <Button
+                        x:Name="CatButton"
+                        Click="ItemButton_Click"
+                        Content="Cat" />
+                    <Button
+                        x:Name="DogButton"
+                        Click="ItemButton_Click"
+                        Content="Dog" />
+                    <Button
+                        x:Name="MouseButton"
+                        Click="ItemButton_Click"
+                        Content="Mouse" />
+                </StackPanel>
+
+                <Button
+                    x:Name="ClearButton"
+                    Margin="0,0,0,7"
+                    Click="ClearButton_Click"
+                    Content="Clear List" />
+            </StackPanel>
+
+        </StackPanel>
+
         <TextBlock
+            Grid.Column="1"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Text="Loading..." />
         <WebView2
             x:Name="WebView2"
+            Grid.Column="1"
             CoreWebView2Initialized="WebView2_CoreWebView2Initialized"
             NavigationCompleted="WebView2_NavigationCompleted"
-            Source="https://developer.microsoft.com/microsoft-edge/webview2/"
             Visibility="Collapsed" />
     </Grid>
 </Page>
