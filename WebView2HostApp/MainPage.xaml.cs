@@ -21,7 +21,6 @@ public sealed partial class MainPage : Page
     public MainPage()
     {
         _bridge = new Bridge();
-        _bridge.ItemsChangedEvent += UpdateItemsList;
 
         InitializeComponent();
 
@@ -34,10 +33,11 @@ public sealed partial class MainPage : Page
 
         WebView2.CoreWebView2.Settings.AreHostObjectsAllowed = true;
         WebView2.CoreWebView2.SetVirtualHostNameToFolderMapping("appassets.html.example", "html", CoreWebView2HostResourceAccessKind.Allow);
-        WebView2.Source = new Uri("http://appassets.html.example/add_host_object.html");
+        WebView2.Source = new Uri("http://appassets.html.example/webmessage.html");
 
-        var dispatchAdapter = new WinRTAdapter.DispatchAdapter();
-        WebView2.CoreWebView2.AddHostObjectToScript("BridgeInstance", dispatchAdapter.WrapObject(_bridge, dispatchAdapter));
+        // Member not found error
+        ////var dispatchAdapter = new WinRTAdapter.DispatchAdapter();
+        ////WebView2.CoreWebView2.AddHostObjectToScript("BridgeInstance", dispatchAdapter.WrapObject(_bridge, dispatchAdapter));
     }
 
     private void WebView2_CoreWebView2Initialized(WebView2 sender, CoreWebView2InitializedEventArgs args)
@@ -57,19 +57,10 @@ public sealed partial class MainPage : Page
         WebView2.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
     }
 
-    private void UpdateItemsList(object sender, IList<string> items)
+    private void WebView2_WebMessageReceived(WebView2 sender, CoreWebView2WebMessageReceivedEventArgs args)
     {
-        ItemsListTextBox.Text = string.Join("\n", items);
-    }
+        IncomingText.Text = args.TryGetWebMessageAsString();
 
-    private void ItemButton_Click(object sender, RoutedEventArgs e)
-    {
-        var text = (sender as Button).Content as string;
-        _bridge.AppendToItems(text);
-    }
-
-    private void ClearButton_Click(object sender, RoutedEventArgs e)
-    {
-        _bridge.ClearItems();
+        WebView2.CoreWebView2.PostWebMessageAsString(IncomingText.Text + " Reply");
     }
 }

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<!--Copyright (C) Microsoft Corporation. All rights reserved.
+Use of this source code is governed by a MIT-style license that can be
+found in the LICENSE file.-->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Add Host Object</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        window.chrome.webview.addEventListener('message', arg => {
+            document.getElementById("message-reply").innerHTML = arg.data;
+        });
+
+        function SendMessage(button) {
+            let text = document.getElementById("message-text").value;
+            window.chrome.webview.postMessage(text);
+        }
+    </script>
+</head>
+<body class="bestoftheweb_bg">
+    <h2 id="header" class="page_header">Web Message</h2>
+
+    <div class="section_header">Text</div>
+        <textarea id="message-text" placeholder="Type text here."></textarea>
+    <div>
+        <button onclick="SendMessage(this)">Send</button>
+    </div>
+    <div class="section_header">Replies:</div>
+    <div>
+        <span id="message-reply"></span>
+    </div>
+</body>
+</html>

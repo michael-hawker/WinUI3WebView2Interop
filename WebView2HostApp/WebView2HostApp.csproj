@@ -23,6 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Html\add_host_object.html" />
+    <None Remove="Html\webmessage.html" />
     <None Remove="MainPage.xaml" />
   </ItemGroup>
 
@@ -34,6 +35,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Html\webmessage.html" />
     <Content Include="Html\add_host_object.html" />
   </ItemGroup>
 

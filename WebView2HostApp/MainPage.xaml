@@ -21,22 +21,14 @@
         <StackPanel Grid.Column="0" Margin="23">
             <RichTextBlock IsTextSelectionEnabled="True" TextWrapping="Wrap">
                 <Paragraph>
-                    This example shows how to add a host object to the WebView. See <Hyperlink
+                    This example shows how to use messages to communicate with the WebView. See <Hyperlink
                         FontWeight="SemiBold"
-                        NavigateUri="https://learn.microsoft.com/en-us/dotnet/api/microsoft.web.webview2.core.corewebview2.addhostobjecttoscript"
+                        NavigateUri="https://learn.microsoft.com/microsoft-edge/webview2/how-to/communicate-btwn-web-native"
                         UnderlineStyle="None">
                         here
                     </Hyperlink>
-                    for more details about the AddHostObjectToScript API.</Paragraph>
+                    for more details about the PostMessage API.</Paragraph>
                 <Paragraph />
-                <Paragraph>
-                    Using AddHostObjectToScript in a UWP app requires a different approach then the .NET based injection. See <Hyperlink
-                        FontWeight="SemiBold"
-                        NavigateUri="https://learn.microsoft.com/en-us/microsoft-edge/webview2/how-to/winrt-from-js?tabs=csharp"
-                        UnderlineStyle="None">
-                        here
-                    </Hyperlink>
-                    for more details.</Paragraph>
             </RichTextBlock>
 
             <TextBlock
@@ -44,41 +36,18 @@
                 HorizontalAlignment="Stretch"
                 FontWeight="Bold"
                 IsTextSelectionEnabled="False"
-                Text="Items"
+                Text="Message"
                 TextWrapping="Wrap" />
             <TextBox
-                x:Name="ItemsListTextBox"
+                x:Name="IncomingText"
                 Width="Auto"
                 Height="172"
                 Margin="0,0,0,7"
                 HorizontalAlignment="Stretch"
                 AcceptsReturn="False"
                 IsReadOnly="True"
-                PlaceholderText="Add items to this list by clicking the buttons below."
+                PlaceholderText="Waiting for message..."
                 TextWrapping="Wrap" />
-
-            <StackPanel Orientation="Vertical" Spacing="7">
-                <StackPanel Orientation="Horizontal" Spacing="7">
-                    <Button
-                        x:Name="CatButton"
-                        Click="ItemButton_Click"
-                        Content="Cat" />
-                    <Button
-                        x:Name="DogButton"
-                        Click="ItemButton_Click"
-                        Content="Dog" />
-                    <Button
-                        x:Name="MouseButton"
-                        Click="ItemButton_Click"
-                        Content="Mouse" />
-                </StackPanel>
-
-                <Button
-                    x:Name="ClearButton"
-                    Margin="0,0,0,7"
-                    Click="ClearButton_Click"
-                    Content="Clear List" />
-            </StackPanel>
 
         </StackPanel>
 
@@ -92,6 +61,7 @@
             Grid.Column="1"
             CoreWebView2Initialized="WebView2_CoreWebView2Initialized"
             NavigationCompleted="WebView2_NavigationCompleted"
+            WebMessageReceived="WebView2_WebMessageReceived"
             Visibility="Collapsed" />
     </Grid>
 </Page>
